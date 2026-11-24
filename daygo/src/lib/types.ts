@@ -1,5 +1,5 @@
-export type DataSource = "live" | "cached" | "demo";
-export interface Airport { iata: string; city: string; country: string; tz: string }
+export type DataSource = "live" | "cached" | "test" | "demo";
+export interface Airport { iata: string; city: string; country: string; tz: string; lat?: number; lon?: number; name?: string }
 export interface Flight {
   id: string; provider: string; airline: string; flightNo: string;
   from: string; to: string; depUtc: string; arrUtc: string; // ISO, UTC
@@ -12,6 +12,7 @@ export interface MatchOptions {
   transferInMin: number;         // Ankunft + Transfer in die Stadt
   transferOutMin: number;        // Rückweg + Check-in/Security-Puffer
   directOnly: boolean;
+  weekdays?: number[]; // 0=Sonntag … 6=Samstag, bezogen auf Abflugdatum
 }
 export const DEFAULT_OPTS: MatchOptions = {
   outWindow: [360, 600], retWindow: [1080, 1439],
@@ -23,4 +24,4 @@ export interface Trip {
   separateTickets: boolean; // getrennte Tickets => Risiko kommunizieren
   source: DataSource;       // schlechtester Wert beider Flüge
 }
-export interface DestinationResult { dest: Airport; date: string; best: Trip; alternatives: Trip[]; score: number }
+export interface DestinationResult { origin: Airport; dest: Airport; date: string; best: Trip; alternatives: Trip[]; score: number }

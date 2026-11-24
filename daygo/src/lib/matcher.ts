@@ -1,7 +1,7 @@
 import { Airport, Flight, MatchOptions, Trip, DEFAULT_OPTS } from "./types";
 import { localParts } from "./tz";
 
-const rank = { live: 0, cached: 1, demo: 2 } as const;
+const rank = { live: 0, cached: 1, test: 2, demo: 3 } as const;
 const round2 = (n: number) => Math.round(n * 100) / 100;
 
 /**
