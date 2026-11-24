@@ -19,7 +19,7 @@ export function findAirports(query: string, limit = 20): Airport[] {
   const q = query.trim().toLocaleLowerCase("de");
   if (q.length < 2) return [];
   return AIRPORT_LIST.filter(a => a.iata.toLowerCase().includes(q) || a.city.toLocaleLowerCase("de").includes(q)
-    || a.name.toLocaleLowerCase("de").includes(q) || a.country.toLocaleLowerCase("de").includes(q))
+    || a.name?.toLocaleLowerCase("de").includes(q) || a.country.toLocaleLowerCase("de").includes(q))
     .sort((a,b) => (a.iata.toLowerCase() === q ? -1 : b.iata.toLowerCase() === q ? 1 : a.city.localeCompare(b.city,"de")))
     .slice(0, limit);
 }
